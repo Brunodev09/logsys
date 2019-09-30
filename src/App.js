@@ -4,7 +4,8 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import Searchbar from './components/pages/Searchbar';
 import Logs from './components/logs/Logs';
 import AddButton from './components/pages/AddButton';
-
+import AddLogModal from './components/logs/AddModalLog';
+import EditLogModal from './components/logs/EditModalLog';
 
 import './App.css';
 
@@ -15,6 +16,8 @@ function App() {
         <Searchbar />
         <div className="container">
           <AddButton />
+          <AddLogModal />
+          <EditLogModal />
           <Logs />
         </div>
     </div>

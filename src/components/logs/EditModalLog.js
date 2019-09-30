@@ -1,29 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
+const EditLogModal = ({ current, updateLog }) => {
+  const [message, setMessage] = useState('');
+  const [attention, setAttention] = useState(false);
+  const [tech, setTech] = useState('');
 
-const EditLogModal = () => {
+  useEffect(() => {
+    if (current) {
+      setMessage(current.message);
+      setAttention(current.attention);
+      setTech(current.tech);
+    }
+  }, [current]);
 
-    const [message, setMessage] = useState('');
-    const [attention, setAttention] = useState(false);
-    const [tech, setTech] = useState('');
+  const onSubmit = () => {
+    if (message === '' || tech === '') {
+      M.toast({ html: 'Please enter a message and tech' });
+    } else {
+        console.log(message, tech, attention);
+      };
 
-    const onSubmit = () => {
-        if (message === '' || tech === '') {
-            M.toast({ html: 'Please enter a message and tech' });
-        } else {
-            console.log(message, tech, attention);
-        };
+      M.toast({ html: `Log updated by ${tech}` });
 
-        M.toast({ html: `Log updated by ${tech}` });
-
-        setMessage('');
-        setTech('');
-        setAttention(false);
+      setMessage('');
+      setTech('');
+      setAttention(false);
     }
 
-    return (
-        <div id='add-log-modal' className='modal' style={modalStyle}>
+
+  return (
+        <div id='edit-log-modal' className='modal' style={modalStyle}>
             <div className='modal-content'>
                 <h4>Enter System Log</h4>
                 <div className='row'>
@@ -85,11 +92,9 @@ const EditLogModal = () => {
     );
 };
 
-
 const modalStyle = {
-    width: '75%',
-    height: '75%'
+  width: '75%',
+  height: '75%'
 };
 
-
-export default EditLogModal
+export default EditLogModal;
